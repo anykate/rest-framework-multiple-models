@@ -1,0 +1,58 @@
+{% extends '_base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}Create & Consume REST Framework to show data from multiple models{% endblock %}
+
+{% block content %}
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-md-10">
+				<h1>Employee Table (Model 1)</h1>
+				<table class="my-3 table">
+					<tr>
+						<th>ID</th>
+						<th>Name</th>
+						<th>Email</th>
+						<th>Salary</th>
+					</tr>
+					{% for eachrecord in  emp_data %}
+						<tr>
+							<td>{{ eachrecord.id }}</td>
+							<td>{{ eachrecord.empname }}</td>
+							<td>{{ eachrecord.email }}</td>
+							<td>{{ eachrecord.salary }}</td>
+						</tr>
+					{% endfor %}
+				</table>
+				<hr>
+				<h1>Sport Table (Model 2)</h1>
+				<table class="my-3 table">
+					<tr>
+						<th>ID</th>
+						<th>Name</th>
+					</tr>
+					{% for eachrecord in  sport_data %}
+						<tr>
+							<td>{{ eachrecord.id }}</td>
+							<td>{{ eachrecord.sportname }}</td>
+						</tr>
+					{% endfor %}
+				</table>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
+{% block extra_js %}
+	<script>
+		// Remove empty cells
+		$(document).ready(function(){
+			$("td").each(function(){
+				if(this.innerText === ''){
+					this.closest("tr").remove();
+				}
+			});
+		});
+	</script>
+{% endblock %}
